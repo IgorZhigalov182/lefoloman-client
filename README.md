@@ -1,7 +1,9 @@
 Run:
 
 cd lefoloman-client
+
 yarn
+
 yarn dev
 
 # React + Vite
