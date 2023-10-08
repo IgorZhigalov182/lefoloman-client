@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import '../src/styles/App.css';
-import Map from './components/ui/map/Map';
-import UseActualPosition from './hooks/usePosition';
+import MainLayout from './layout/main/MainLayout';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,7 +8,8 @@ function App() {
   return (
     <div className="container">
       {/* Navbar */}
-      <Map />
+      {/* <Map /> */}
+      <MainLayout />
     </div>
   );
 }
