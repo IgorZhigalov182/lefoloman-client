@@ -1,27 +1,28 @@
-// import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import usePosition from '../../../hooks/usePosition';
 
 const Map = () => {
   const { position, error } = usePosition();
+  const { longitude, latitude } = position;
+
+  if (error) {
+    return;
+  }
 
   return (
-    <div>
-      {!position.latitude ? <h1>Loading...</h1> : <h1>Actual position:</h1>}
-      <h3>longitude : {position.longitude}</h3>
-      <h3>latitude : {position.latitude}</h3>
-      <h3>accuracy : {position.accuracy}</h3>
+    longitude && latitude && <div className='container'>
+      <MapContainer center={[longitude, latitude]} zoom={15} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[longitude, latitude]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     </div>
-    // <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-    //   <TileLayer
-    //     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    //     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    //   />
-    //   <Marker position={[51.505, -0.09]}>
-    //     <Popup>
-    //       A pretty CSS3 popup. <br /> Easily customizable.
-    //     </Popup>
-    //   </Marker>
-    // </MapContainer>
   );
 };
 
