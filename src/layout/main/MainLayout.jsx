@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UserOutlined, UpCircleFilled, CloudFilled, SyncOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 
@@ -19,7 +19,7 @@ const MainLayout = () => {
   const { position, error } = usePosition();
   const { latitude, longitude, accuracy } = position;
 
-  const { navTab } = useSelector(store => ({
+  const { navTab } = useSelector((store) => ({
     navTab: store.state.navTab,
   }));
 
@@ -33,10 +33,9 @@ const MainLayout = () => {
   //   }
   // };
 
-
   return (
     <Layout theme={colorTheme} style={{ height: '100vh' }}>
-      <Header/>
+      <Header />
       <Layout>
         <Content
           style={{
@@ -46,12 +45,8 @@ const MainLayout = () => {
             position: 'relative',
             zIndex: 1,
           }}>
-          <Sidebar>
-            {
-              navTab === 'branches' && <Branches/>
-            }
-          </Sidebar>
-          <Map start={[latitude, longitude]} end={[59.5704128, 30.2710784]} />
+          <Sidebar>{navTab === 'branches' && <Branches />}</Sidebar>
+          <Map />
         </Content>
       </Layout>
     </Layout>

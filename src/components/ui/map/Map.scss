@@ -1,0 +1,54 @@
+.leaflet-popup {
+    margin-bottom: 85px;
+    margin-left: -8px;
+}
+
+.leaflet-top.leaflet-right {
+    display: none;
+}
+
+// .leaflet-top.leaflet-left {
+    // left: 85%;
+    // top: 65%;
+// }
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control {
+    border: none; 
+}
+
+// .leaflet-control-zoom-in {
+//     margin-top: 10px;
+//     margin-bottom: 10px;
+// }
+
+.leaflet-control-attribution {
+    display: none;
+}
+
+.leaflet-routing-collapse-btn {
+    display: none;
+}
+
+// @media (min-width: 576px) {
+//     .leaflet-top.leaflet-left {
+//         left: 70%;
+//     }
+// }
+
+// @media (min-width: 768px) {
+//     .leaflet-top.leaflet-left {
+//         left: 75%;
+//     }
+// }
+
+// @media (min-width: 992px) {
+//     .leaflet-top.leaflet-left {
+//         left: 80%;
+//     }
+// }
+
+// @media (min-width: 1200px) {
+//     .leaflet-top.leaflet-left {
+//         left: 95%;
+//     }
+// }

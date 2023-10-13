@@ -1,88 +1,73 @@
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import usePosition from '../../../hooks/usePosition';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-import L from 'leaflet';
 import 'leaflet-routing-machine';
-import PropTypes from 'prop-types';
 import data from './data.json';
+import { myIcon } from '../Icon';
+import RouteMachine from '../RouteMachine';
+import './Map.scss';
+import ChildMap from './ChildMap';
 
-const Map = ({ start, end }) => {
+const Map = () => {
   const { position, error } = usePosition();
-  const { longitude, latitude, accuracy } = position;
+  const { latitude, longitude, accuracy } = position;
   const mapRef = useRef(null);
-  const [routeControl, setRouteControl] = useState(null);
-  const currentLocation = [latitude, longitude];
 
   if (error) {
     return;
   }
 
   useEffect(() => {
-    const osmMark = document.querySelector('.leaflet-control-attribution');
-
-    if (osmMark) {
-      osmMark.style = 'display: none';
+    function getElements(selector) {
+      return Array.from(document.querySelectorAll(selector));
     }
-  }, [longitude]);
 
-  const MAP_KEY =
-    'pk.eyJ1IjoiaWdvcnpoaWdhbG92MTgyIiwiYSI6ImNsbmtvM3N6MjBveHMyanAydnczdndwY2EifQ.IOoiPxFto_GPTHWqmpSGHw';
+    const dynamicSelector = '.leaflet-marker-draggable';
 
-  useEffect(() => {
-    if (mapRef.current && !routeControl) {
-      const map = mapRef.current.leafletElement;
-      const control = L.Routing.control({
-        waypoints: [L.latLng(currentLocation), L.latLng(end)],
-        router: L.Routing.openRouteService({
-          api_key: MAP_KEY,
-          profile: 'driving-car',
-          timeout: 30 * 1000,
-          geometry_simplify: true,
-        }),
+    const elements = getElements(dynamicSelector);
 
-        showAlternatives: true,
-        routeWhileDragging: true,
-        geocoder: L.Control.Geocoder.nominatim(),
-      }).addTo(map);
-
-      setRouteControl(control);
-    }
+    elements.forEach((element) => {
+      console.log(element);
+      element.src = '../../../public/location.png';
+      element.style.width = '40px';
+    });
   }, []);
-  mapRef, routeControl, start, end;
 
   return (
     <>
       {longitude && latitude && (
         <div className="container">
-          <MapContainer center={[latitude, longitude]} zoom={13} ref={mapRef}>
-            <div ref={mapRef} style={{ height: '100%', width: '100%' }} />
+          <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef}>
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+              // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}.png"
+              // attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+            />
+            <RouteMachine
+              startLat={latitude}
+              startLong={longitude}
+              endLat={60.016993282293896}
+              endLong={30.246159601442688}
             />
             {data?.branch.map((branch) => (
-              <Marker key={branch.name} position={[...branch.coordinates]}>
-                <Popup>{branch.name}</Popup>
+              <Marker icon={myIcon} key={branch.name} position={[...branch.coordinates]}>
+                <Popup>
+                  {branch.name}
+                  <br />
+                  <br />
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quos omnis qui, odio
+                  blanditiis officiis deleniti. Iste magni laboriosam debitis facere? Impedit
+                  doloremque omnis explicabo, veniam dolorum vel maiores necessitatibus!
+                </Popup>
               </Marker>
             ))}
-            <Marker position={[latitude, longitude]}>
-              <Popup>Current position</Popup>
-            </Marker>
-            <Marker position={end}>
-              <Popup>End</Popup>
-            </Marker>
-            <Polyline positions={[currentLocation, end]} />
+            <ChildMap />
           </MapContainer>
         </div>
       )}
     </>
   );
-};
-
-Map.propTypes = {
-  start: PropTypes.array,
-  end: PropTypes.array,
 };
 
 export default Map;
