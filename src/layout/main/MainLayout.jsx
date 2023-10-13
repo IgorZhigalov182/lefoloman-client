@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -11,6 +11,24 @@ import Map from '../../components/ui/map/Map';
 
 const { Header, Sider, Content } = Layout;
 
+const menuItems = [
+  {
+    key: '1',
+    icon: <UserOutlined />,
+    label: 'Personal area',
+  },
+  {
+    key: '2',
+    icon: <UpCircleFilled />,
+    label: 'Navigator',
+  },
+  {
+    key: '3',
+    icon: <CloudFilled />,
+    label: 'Recomendations',
+  },
+];
+
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -20,52 +38,14 @@ const MainLayout = () => {
 
   return (
     <Layout style={{ height: '100vh' }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          items={[
-            {
-              key: '1',
-              icon: <UserOutlined />,
-              label: 'Personal area',
-            },
-            {
-              key: '2',
-              icon: <UpCircleFilled />,
-              label: 'Navigator',
-            },
-            {
-              key: '3',
-              icon: <CloudFilled />,
-              label: 'Recomendations',
-            },
-          ]}
-        />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={menuItems} />
       </Sider>
       <Layout>
-        <Header
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}>
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
-        </Header>
         <Content
           style={{
-            margin: '24px 16px',
-            padding: 24,
+            margin: '1px 1px',
             minHeight: 280,
             background: colorBgContainer,
           }}>
