@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UserOutlined, UpCircleFilled, CloudFilled, SyncOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import Map from '../../components/ui/map/Map';
@@ -67,10 +67,8 @@ const MainLayout = () => {
         <Content
           style={{
             margin: '1px 1px',
-            minHeight: 280,
-            background: colorBgContainer,
           }}>
-          <Map start={[latitude, longitude]} end={[59.5704128, 30.2710784]} />
+          <Map />
         </Content>
       </Layout>
     </Layout>
