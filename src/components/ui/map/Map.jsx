@@ -5,7 +5,6 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 import data from './data.json';
 
 const Map = ({ start, end }) => {
@@ -52,7 +51,6 @@ const Map = ({ start, end }) => {
   }, []);
   mapRef, routeControl, start, end;
 
-  //
   return (
     <>
       {longitude && latitude && (
@@ -63,15 +61,11 @@ const Map = ({ start, end }) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
             />
-                {
-            data?.branch.map(branch => (
-              <Marker position={[...branch.coordinates]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
+            {data?.branch.map((branch) => (
+              <Marker key={branch.name} position={[...branch.coordinates]}>
+                <Popup>{branch.name}</Popup>
               </Marker>
-            ))
-          }
+            ))}
             <Marker position={[latitude, longitude]}>
               <Popup>Current position</Popup>
             </Marker>
