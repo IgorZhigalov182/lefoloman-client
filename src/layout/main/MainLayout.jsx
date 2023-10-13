@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined,
-  UpCircleFilled,
-  CloudFilled,
-} from '@ant-design/icons';
+import { UserOutlined, UpCircleFilled, CloudFilled, SyncOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import Map from '../../components/ui/map/Map';
+import { useTheme } from '../../hooks/useTheme';
+import usePosition from '../../hooks/usePosition';
+import './MainLayout.scss';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const menuItems = [
   {
@@ -27,20 +24,44 @@ const menuItems = [
     icon: <CloudFilled />,
     label: 'Recomendations',
   },
+  {
+    key: '4',
+    icon: <SyncOutlined />,
+    label: 'Switch theme',
+  },
 ];
 
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { theme: colorTheme, setTheme } = useTheme();
+  const { position, error } = usePosition();
+  const { latitude, longitude, accuracy } = position;
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
+  const handleSwitchMenu = ({ key }) => {
+    if (key === '4') {
+      colorTheme === 'light' ? setTheme('dark') : setTheme('light');
+    }
+  };
+
   return (
-    <Layout style={{ height: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+    <Layout theme={colorTheme} style={{ height: '100vh' }}>
+      <Sider
+        theme={colorTheme}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} items={menuItems} />
+        <Menu
+          theme={colorTheme}
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          items={menuItems}
+          onClick={handleSwitchMenu}
+        />
       </Sider>
       <Layout>
         <Content
@@ -49,7 +70,7 @@ const MainLayout = () => {
             minHeight: 280,
             background: colorBgContainer,
           }}>
-          <Map />
+          <Map start={[latitude, longitude]} end={[59.5704128, 30.2710784]} />
         </Content>
       </Layout>
     </Layout>

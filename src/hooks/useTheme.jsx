@@ -9,7 +9,7 @@ export const useTheme = () => {
 
   useLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setTheme('APP_THEME', theme);
+    localStorage.setItem('APP_THEME', theme);
   }, [theme]);
 
   return { theme, setTheme };
