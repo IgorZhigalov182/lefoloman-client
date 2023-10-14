@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserOutlined, UpCircleFilled, CloudFilled, SyncOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import Map from '../../components/ui/map/Map';
@@ -7,9 +7,11 @@ import { useTheme } from '../../hooks/useTheme';
 import usePosition from '../../hooks/usePosition';
 import './MainLayout.scss';
 import Sidebar from '../../components/ui/sidebar/Sidebar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Branches from '../../components/ui/branches/Branches';
 import Footbar from '../../components/ui/footbar/Footbar';
+import RouteHistory from '../../components/ui/route-history/RouteHistory';
+import { CHANGE_SIDEBAR_TYPE } from '../../services/actions';
 
 const { Sider, Content } = Layout;
 
@@ -19,8 +21,10 @@ const MainLayout = () => {
   const { position, error } = usePosition();
   const { latitude, longitude, accuracy } = position;
 
-  const { navTab } = useSelector((store) => ({
+  const { navTab, footer, sidebarType } = useSelector((store) => ({
     navTab: store.state.navTab,
+    footer: store.state.footer,
+    sidebarType: store.state.sidebarType
   }));
 
   const {
@@ -45,7 +49,18 @@ const MainLayout = () => {
             position: 'relative',
             zIndex: 1,
           }}>
-          <Sidebar>{navTab === 'branches' && <Branches />}</Sidebar>
+          {
+            (!sidebarType && !footer) && 
+              <Sidebar><Branches /></Sidebar>
+          }
+          {
+            ['1', '2', '3'].includes(sidebarType) && 
+            <Sidebar>
+              {sidebarType === '1' && <RouteHistory />}
+              {sidebarType === '2' && <Branches />}
+              {sidebarType === '3' && <Branches/>}
+            </Sidebar>
+          }
           <Footbar />
           <Map />
         </Content>
