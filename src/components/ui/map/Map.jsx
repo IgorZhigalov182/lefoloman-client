@@ -38,7 +38,7 @@ const Map = () => {
     <>
       {longitude && latitude && (
         <div className="container">
-          <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef}>
+          <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} zoomControl={false}>
             <TileLayer
               // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}.png"
