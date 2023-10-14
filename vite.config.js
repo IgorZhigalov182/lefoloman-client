@@ -33,6 +33,8 @@ export default defineConfig({
               purpose: "any"
             },
           ],
+          orientation: "portrait-primary",
+          lang: "ru"
         },
       }),
   ]
