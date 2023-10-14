@@ -32,7 +32,10 @@ const Map = () => {
       element.src = '../../../public/location.png';
       element.style.width = '40px';
     });
-  }, []);
+  }, [latitude]);
+
+  // const a = new Date()
+  // a.getTime()
 
   return (
     <>
