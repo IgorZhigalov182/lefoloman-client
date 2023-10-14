@@ -1,0 +1,23 @@
+@media (min-width: 800px) { 
+    .desktop {
+        width: 400px;
+        height: calc(100% - 40px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 20px;
+        border-radius: 15px;
+        z-index: 1000;
+        background-color: white;
+    }
+
+    .sidebar__search {
+        padding: 15px 15px 0 15px;
+    }
+}
+
+@media (max-width: 800px) { 
+    .desktop {
+        display: none;
+    }
+}

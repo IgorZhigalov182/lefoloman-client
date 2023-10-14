@@ -1,17 +1,18 @@
-import './Sidebar.scss';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Input } from 'antd';
 const { Search } = Input;
 
 import './Sidebar.scss';
-import { useDispatch } from 'react-redux';
 
 const Sidebar = ({ children }) => {
     const dispatch = useDispatch();
     const onSearch = (value, _e, info) => {
-        useDispatch({
+        dispatch({
             type: SEARCH_BRANCH
         });
     };
+
     return (
         <div className='desktop'>
             <div className='sidebar__search'>
