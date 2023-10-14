@@ -6,21 +6,21 @@ const { Search } = Input;
 import './Sidebar.scss';
 
 const Sidebar = ({ children }) => {
-    const dispatch = useDispatch();
-    const onSearch = (value, _e, info) => {
-        dispatch({
-            type: SEARCH_BRANCH
-        });
-    };
+  const dispatch = useDispatch();
+  const onSearch = (value, _e, info) => {
+    dispatch({
+      type: SEARCH_BRANCH,
+    });
+  };
 
-    return (
-        <div className='desktop'>
-            <div className='sidebar__search'>
-                <Search placeholder="input search text" onSearch={onSearch} enterButton />
-            </div>
-            {children}
-        </div>
-    )
-}
+  return (
+    <div className="desktop">
+      <div className="sidebar__search">
+        <Search placeholder="input search text" onSearch={onSearch} enterButton />
+      </div>
+      {children}
+    </div>
+  );
+};
 
 export default Sidebar;
