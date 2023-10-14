@@ -9,12 +9,12 @@ function App() {
   const [count, setCount] = useState(0);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getBranches());
-  },[]);
+  // useEffect(() => {
+  //   dispatch(getBranches());
+  // }, []);
 
   return (
-    <div className='container'>
+    <div className="container">
       {/* Navbar */}
       {/* <Map /> */}
       <MainLayout />
