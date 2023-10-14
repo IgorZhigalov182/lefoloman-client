@@ -20,6 +20,7 @@ const MainLayout = () => {
   const { theme: colorTheme, setTheme } = useTheme();
   const { position, error } = usePosition();
   const { latitude, longitude, accuracy } = position;
+  const [coordinates, setCoordinates] = useState(null);
 
   const { navTab, footer, sidebarType } = useSelector((store) => ({
     navTab: store.state.navTab,
@@ -62,7 +63,7 @@ const MainLayout = () => {
             </Sidebar>
           }
           <Footbar />
-          <Map />
+          <Map coords={coordinates} />
         </Content>
       </Layout>
     </Layout>

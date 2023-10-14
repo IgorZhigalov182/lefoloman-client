@@ -5,6 +5,7 @@ import {
   GET_BRANCHES_SUCCESS,
   SEARCH_BRANCH,
   TOGGLE_FOOTER,
+  SET_DIRECTION,
   CHANGE_SIDEBAR_TYPE
 } from '../actions';
 import { combineReducers } from 'redux';
@@ -14,6 +15,7 @@ const initialState = {
     branchesRequest: false,
     error: true,
     footer: false,
+    direction: null,
     sidebarType: document.documentElement.clientWidth >=768 ? null : 'mobile',
     currentFilters: {
         user_x: 10.0,
@@ -394,6 +396,12 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case SET_DIRECTION: {
+      return {
+        ...state,
+        direction: action.payload,
+      };
+      
     case CHANGE_SIDEBAR_TYPE: {
         return {
             ...state,

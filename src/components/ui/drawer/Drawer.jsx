@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Branches from '../branches/Branches';
 import styles from './Drawer.module.scss';
 import RouteHistory from '../route-history/RouteHistory';
+import { ReactSVG } from 'react-svg';
 import Sidebar from '../sidebar/Sidebar';
 
 const Drawer = ({ isOpen, toggleDrawer, type, children }) => {

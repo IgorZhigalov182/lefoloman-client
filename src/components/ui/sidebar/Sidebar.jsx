@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Input } from 'antd';
 const { Search } = Input;
-
 import './Sidebar.scss';
 import { ReactSVG } from 'react-svg';
 import SidebarSlider from '../sidebar-slider/SidebarSlider';
@@ -56,8 +55,15 @@ const Sidebar = ({ children }) => {
                     </SidebarSlider>
             }
         </div>
-    )
-}
-
+        {children}
+      </div>
+      {showSlider && (
+        <SidebarSlider onClose={onClose}>
+          <Filters />
+        </SidebarSlider>
+      )}
+    </div>
+  );
+};
 
 export default Sidebar;
