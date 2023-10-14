@@ -4,10 +4,6 @@
     height: 100%;
 }
 
-.branches__cards {
-    
-}
-
 .description {
     display: flex;
     flex-direction: column;
@@ -18,8 +14,12 @@
     flex-direction: row;
     gap: 20px;
     align-items: center;
-    padding: 20px 20px 0px 20px;
+    padding: 20px;
     text-decoration: none !important;
+}
+
+.branch__card:hover {
+    background-color: #F3F3F3;
 }
 
 .icon {
@@ -30,4 +30,8 @@
 .span__radius {
     color: grey;
     font-size: 12px;
+}
+
+.title {
+    margin: 0;
 }
