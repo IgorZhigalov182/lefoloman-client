@@ -5,6 +5,7 @@ import {
   GET_BRANCHES_SUCCESS,
   SEARCH_BRANCH,
   TOGGLE_FOOTER,
+  SET_DIRECTION,
 } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -13,6 +14,7 @@ const initialState = {
   branchesRequest: false,
   error: true,
   footer: false,
+  direction: null,
   branches: [
     {
       id: 11,
@@ -167,6 +169,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         footer: !state.footer,
+      };
+    }
+
+    case SET_DIRECTION: {
+      return {
+        ...state,
+        direction: action.payload,
       };
     }
 

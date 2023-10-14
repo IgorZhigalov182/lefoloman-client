@@ -6,6 +6,7 @@ export const GET_BRANCHES_REQUEST = 'GET_BRANCHES_REQUEST';
 export const GET_BRANCHES_SUCCESS = 'GET_BRANCHES_SUCCESS';
 export const GET_BRANCHES_ERRROR = 'GET_BRANCHES_ERRROR';
 export const TOGGLE_FOOTER = 'TOGGLE_FOOTER';
+export const SET_DIRECTION = 'SET_DIRECTION';
 
 export function getBranches() {
   return function (dispatch) {

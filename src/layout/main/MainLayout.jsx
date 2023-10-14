@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserOutlined, UpCircleFilled, CloudFilled, SyncOutlined } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
 import Map from '../../components/ui/map/Map';
@@ -7,9 +7,9 @@ import { useTheme } from '../../hooks/useTheme';
 import usePosition from '../../hooks/usePosition';
 import './MainLayout.scss';
 import Sidebar from '../../components/ui/sidebar/Sidebar';
-import { useSelector } from 'react-redux';
 import Branches from '../../components/ui/branches/Branches';
 import Footbar from '../../components/ui/footbar/Footbar';
+import { useSelector } from 'react-redux';
 
 const { Sider, Content } = Layout;
 
@@ -18,6 +18,7 @@ const MainLayout = () => {
   const { theme: colorTheme, setTheme } = useTheme();
   const { position, error } = usePosition();
   const { latitude, longitude, accuracy } = position;
+  const [coordinates, setCoordinates] = useState(null);
 
   const { navTab } = useSelector((store) => ({
     navTab: store.state.navTab,
@@ -47,7 +48,7 @@ const MainLayout = () => {
           }}>
           <Sidebar>{navTab === 'branches' && <Branches />}</Sidebar>
           <Footbar />
-          <Map />
+          <Map coords={coordinates} />
         </Content>
       </Layout>
     </Layout>

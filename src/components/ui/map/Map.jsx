@@ -8,29 +8,28 @@ import { myIcon } from '../Icon';
 import RouteMachine from '../RouteMachine';
 import './Map.scss';
 import ChildMap from './ChildMap';
+import { useSelector } from 'react-redux';
 
-const Map = () => {
+const Map = ({ coordinates }) => {
   const { position, error } = usePosition();
   const { latitude, longitude, accuracy } = position;
   const mapRef = useRef(null);
+  const rMachine = useRef();
 
   if (error) {
     return;
   }
 
-  // useEffect(() => {
-  //   function getElements(selector) {
-  //     return Array.from(document.querySelectorAll(selector));
-  //   }
+  const coords = useSelector((store) => store.state.direction);
 
-  //   const elements = getElements('.leaflet-marker-icon');
-
-  //   elements.forEach((element) => {
-  //     console.log(element);
-  //     element.src = '../../../public/location.png';
-  //     element.style.width = '40px';
-  //   });
-  // }, []);
+  useEffect(() => {
+    if (rMachine.current) {
+      rMachine.current.setWaypoints([
+        L.latLng(latitude, longitude),
+        L.latLng(coords.lat, coords.lon),
+      ]);
+    }
+  }, [coords, rMachine]);
 
   setTimeout(() => {
     function getElements(selector) {
@@ -43,10 +42,7 @@ const Map = () => {
       element.src = '../../../public/location.png';
       element.style.width = '40px';
     });
-  }, 1000);
-
-  // const a = new Date()
-  // a.getTime()
+  }, 500);
 
   return (
     <>
@@ -59,22 +55,14 @@ const Map = () => {
               // attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
             />
             <RouteMachine
+              ref={rMachine}
               startLat={latitude}
               startLong={longitude}
-              endLat={60.016993282293896}
-              endLong={30.246159601442688}
+              endLat={coordinates?.latitude}
+              endLong={coordinates?.longitude}
             />
             {data?.branch.map((branch) => (
-              <Marker icon={myIcon} key={branch.name} position={[...branch.coordinates]}>
-                <Popup>
-                  {branch.name}
-                  <br />
-                  <br />
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia quos omnis qui, odio
-                  blanditiis officiis deleniti. Iste magni laboriosam debitis facere? Impedit
-                  doloremque omnis explicabo, veniam dolorum vel maiores necessitatibus!
-                </Popup>
-              </Marker>
+              <Marker icon={myIcon} key={branch.name} position={[...branch.coordinates]}></Marker>
             ))}
             <ChildMap />
           </MapContainer>
