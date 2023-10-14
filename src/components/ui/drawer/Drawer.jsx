@@ -7,7 +7,6 @@ const Drawer = ({ isOpen, toggleDrawer, children }) => {
   const [dragging, setDragging] = useState(false);
   const [initialY, setInitialY] = useState(0);
   const drawerRef = useRef(null);
-
   //   const handleTouchStart = (e) => {
   //     const touchObject = e.touches[0];
   //     setInitialY(touchObject.clientY);
