@@ -18,21 +18,32 @@ const Map = () => {
     return;
   }
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   function getElements(selector) {
+  //     return Array.from(document.querySelectorAll(selector));
+  //   }
+
+  //   const elements = getElements('.leaflet-marker-icon');
+
+  //   elements.forEach((element) => {
+  //     console.log(element);
+  //     element.src = '../../../public/location.png';
+  //     element.style.width = '40px';
+  //   });
+  // }, []);
+
+  setTimeout(() => {
     function getElements(selector) {
       return Array.from(document.querySelectorAll(selector));
     }
 
-    const dynamicSelector = '.leaflet-marker-draggable';
-
-    const elements = getElements(dynamicSelector);
+    const elements = getElements('.leaflet-marker-icon');
 
     elements.forEach((element) => {
-      console.log(element);
       element.src = '../../../public/location.png';
       element.style.width = '40px';
     });
-  }, [latitude]);
+  }, 1000);
 
   // const a = new Date()
   // a.getTime()
@@ -41,7 +52,7 @@ const Map = () => {
     <>
       {longitude && latitude && (
         <div className="container">
-          <MapContainer center={[latitude, longitude]} zoom={10} ref={mapRef} zoomControl={false}>
+          <MapContainer center={[latitude, longitude]} zoom={15} ref={mapRef} zoomControl={false}>
             <TileLayer
               // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               url="https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}.png"
