@@ -1,23 +1,24 @@
 @media (min-width: 800px) { 
-    .desktop {
+    .container {
         width: 400px;
         height: calc(100% - 40px);
         position: absolute;
         top: 0;
         left: 0;
-        margin: 20px;
         border-radius: 15px;
-        z-index: 1000;
+        padding: 20px;
+        z-index: 2000;
         background-color: white;
     }
 
-    .sidebar__search {
-        padding: 15px 15px 0 15px;
+    .header {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
 @media (max-width: 800px) { 
-    .desktop {
+    .container {
         display: none;
     }
 }
