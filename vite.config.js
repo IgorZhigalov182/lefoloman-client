@@ -14,29 +14,27 @@ export default defineConfig({
         injectRegister: 'inline',
         // includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
         manifest: {
-          name: 'Найди Банк',
-          short_name: 'Н.Б.',
+          name: 'ВТБ Отделения',
+          short_name: 'VTB',
           description: 'Поиск отделений банковв, быстро и надежно',
           theme_color: '#009fdf',
           start_url: '/',
-          // icons: [
-          //   {
-          //     src: 'pwa-192x192.png',
-          //     sizes: '192x192',
-          //     type: 'image/png',
-          //   },
-          //   {
-          //     src: 'pwa-512x512.png',
-          //     sizes: '512x512',
-          //     type: 'image/png',
-          //   },
-          //   {
-          //     src: 'pwa-512x512.png',
-          //     sizes: '512x512',
-          //     type: 'image/png',
-          //     purpose: 'any maskable',
-          //   },
-          // ],
+          icons: [
+            {
+              src: 'vtb-square-icon-72.webp',
+              sizes: '72x72',
+              type: 'image/webp',
+              purpose: "any"
+            },
+            {
+              src: 'vtb-square-icon-512.webp',
+              sizes: '512x512',
+              type: 'image/webp',
+              purpose: "any"
+            },
+          ],
+          orientation: "portrait-primary",
+          lang: "ru"
         },
       }),
   ]

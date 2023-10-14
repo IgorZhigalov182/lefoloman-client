@@ -1,24 +1,26 @@
 import { Descriptions } from 'antd';
 import { object } from 'prop-types';
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import SidebarSlider from '../sidebar-slider/SidebarSlider';
 import BranchDescription from '../branch-description/BranchDescription';
-
 import styles from './Branches.module.scss';
 import { ReactSVG } from 'react-svg';
 import { useState } from 'react';
 
 const getItems = (branch) => {
-    const items = [{
-        key: 1,
-        label: 'Адрес',
-        children: branch['address']
-    }]
+  const items = [
+    {
+      key: 1,
+      label: 'Адрес',
+      children: branch['address'],
+    },
+  ];
 
-    return items;
-}
+  return items;
+};
 
 const Branch = ({ branch, onClick }) => {
+
     const items = getItems(branch);
 
     return (
@@ -68,3 +70,4 @@ const Branches = () => {
 }
 
 export default Branches;
+

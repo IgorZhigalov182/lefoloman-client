@@ -1,0 +1,51 @@
+@import '../../../styles/variables.scss';
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    margin: 0 auto;
+    display: flex;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    background-color: $vtbLight;
+    background-color: white;
+    opacity: 0.95;
+    height: 10vh;
+    width: 65vw;
+    border-radius: 10px;
+    z-index: 500;
+    // color: ;
+}
+
+@media (min-width: 100px) {
+    .wrapper {
+        width: 55vw;
+    }
+}
+
+@media (min-width: 576px) {
+    .wrapper {
+        width: 30vw;
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    .wrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .wrapper {
+        display: none;
+    }
+}
+

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import './styles/reset.scss';
 import './styles/index.css';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -14,10 +15,9 @@ const composeEnhancers =
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}> 
+    <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>

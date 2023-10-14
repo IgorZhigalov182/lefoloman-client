@@ -9,6 +9,7 @@ import SidebarSlider from '../sidebar-slider/SidebarSlider';
 import Filters from '../filters/Filters';
 
 const Sidebar = ({ children }) => {
+
     const [showSlider, setShowSlider] = useState(false);
     
     const dispatch = useDispatch();
@@ -46,5 +47,6 @@ const Sidebar = ({ children }) => {
         </div>
     )
 }
+
 
 export default Sidebar;
