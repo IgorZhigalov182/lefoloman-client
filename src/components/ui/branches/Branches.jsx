@@ -3,22 +3,14 @@ import { object } from 'prop-types';
 import { useSelector } from "react-redux";
 
 import styles from './Branches.module.scss';
+import { ReactSVG } from 'react-svg';
 
 const getItems = (branch) => {
-    let i = 0;
-    const items = ['address',
-                    'rating',
-                    'metro_station',
-                    'phone_number'].map(it => {
-        if (Object.keys(branch).includes(it)) {
-            i++;
-            return {
-                key: i,
-                label: it,
-                children: branch[it]
-            }
-        }
-    });
+    const items = [{
+        key: 1,
+        label: 'Адрес',
+        children: branch['address']
+    }]
 
     return items;
 }
@@ -27,10 +19,14 @@ const Branch = ({ branch }) => {
     const items = getItems(branch);
 
     return (
-        <div>
-            <h2>{branch.name}</h2>
-            <span>{branch.address}</span>
-        </div>
+        <a className={styles.branch__card}>
+            <ReactSVG className={styles.icon} src='../../src/assets/icon-branch.svg'/>
+            <div className={styles.description}>
+                <h3>{branch.name}</h3>
+                <span>{branch.address}</span>
+                <span className={styles.span__radius}>В радиусе 3 км</span>
+            </div>
+        </a>
     )
 }
 
