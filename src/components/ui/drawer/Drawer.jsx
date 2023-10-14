@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import Branches from '../branches/Branches';
 import styles from './Drawer.module.scss';
 import RouteHistory from '../route-history/RouteHistory';
+import Sidebar from '../sidebar/Sidebar';
 
 const Drawer = ({ isOpen, toggleDrawer, type, children }) => {
   const [height, setHeight] = useState('40%');
@@ -30,20 +31,29 @@ const Drawer = ({ isOpen, toggleDrawer, type, children }) => {
   //   const handleTouchEnd = () => {
   //     setDragging(false);
   //   };
+  // console.log(type);
+  // if (isOpen) {
+  //   document.getElementById('sidebar').classList.remove('hidden');
+  // }
 
   return (
-    <>
-      {children}
-      {isOpen && (
-        <div className={styles.drawer_container} ref={drawerRef}>
-          {type === '1' && <RouteHistory />}
-          {type === '2' && <Branches />}
-          <span onClick={toggleDrawer} className={styles.close_two}>
-            ✖
-          </span>
-        </div>
-      )}
-    </>
+    // <>
+    //   {children}
+    //   {isOpen && (
+    //     <div className={styles.drawer_container} ref={drawerRef}>
+    //       {type === '1' && <RouteHistory />}
+    //       {type === '2' && <Branches />}
+    //       <span onClick={toggleDrawer} className={styles.close_two}>
+    //         ✖
+    //       </span>
+    //     </div>
+    //   )}
+    // </>
+    <Sidebar>
+      {type === '1' && <RouteHistory />}
+      {type === '2' && <Branches />}
+      {type === '3' && <Branches/>}
+    </Sidebar>
   );
 };
 
