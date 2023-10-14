@@ -2,6 +2,7 @@ import { Descriptions } from 'antd';
 import { object } from 'prop-types';
 import { useSelector } from "react-redux";
 import SidebarSlider from '../sidebar-slider/SidebarSlider';
+import BranchDescription from '../branch-description/BranchDescription';
 
 import styles from './Branches.module.scss';
 import { ReactSVG } from 'react-svg';
@@ -21,7 +22,7 @@ const Branch = ({ branch, onClick }) => {
     const items = getItems(branch);
 
     return (
-        <div onClick={onClick} className={styles.branch__card}>
+        <div onClick={(e) => onClick(e, branch)} className={styles.branch__card}>
             <ReactSVG className={styles.icon} src='../../src/assets/icon-branch.svg'/>
             <div className={styles.description}>
                 <h3 className={styles.title}>{branch.name}</h3>
@@ -34,14 +35,17 @@ const Branch = ({ branch, onClick }) => {
 
 const Branches = () => {
     const [ showSlider, setShowSlider ] = useState(false);
+    const [ currentBranch, setCurrentBranch ] = useState(null);
     const branches = useSelector(store => store.state.branches);
 
-    const onClick = () => {
+    const onClick = (e, branch) => {
         setShowSlider(true);
+        setCurrentBranch(branch);
     }
 
-    const hideSlider = () => {
+    const onClose = () => {
         setShowSlider(false);
+        setCurrentBranch(null);
     }
 
     return (
@@ -54,7 +58,10 @@ const Branches = () => {
                 }
             </div>
             {
-                showSlider && <SidebarSlider hideSlider={hideSlider}/>
+                showSlider && currentBranch && 
+                    <SidebarSlider onClose={onClose}>
+                        <BranchDescription branch={currentBranch}/>
+                    </SidebarSlider>
             }
         </div>
     )
