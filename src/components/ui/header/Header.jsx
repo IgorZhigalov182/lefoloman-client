@@ -19,10 +19,12 @@ const headerStyle = {
 
 const NavContent = () => {
   return (
-    <Header style={headerStyle}>
-      <ReactSVG className="icon" src="./src/assets/vtb-icon.svg" />
-      <Navbar />
-    </Header>
+    <div className='header'>
+        <Header style={headerStyle}>
+            <ReactSVG className="icon" src="./src/assets/vtb-icon.svg" />
+            <Navbar />
+        </Header>
+    </div>
   );
 };
 
