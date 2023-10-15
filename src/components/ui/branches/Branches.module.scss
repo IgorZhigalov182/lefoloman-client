@@ -6,6 +6,12 @@
     scrollbar-width: thin;
 }
 
+.btn {
+    width: 10rem;
+    height: 2.25rem;
+    margin-top: 0.5rem;
+}
+
 .container::-webkit-scrollbar {
     width: 5px;
 }
@@ -22,11 +28,15 @@
 
 .branches_cards {
     overflow-y: auto;
+
 }
 
 .branch__card {
     display: flex;
     flex-direction: row;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     gap: 20px;
     align-items: center;
     padding: 20px;

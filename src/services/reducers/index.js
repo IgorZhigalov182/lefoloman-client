@@ -7,6 +7,8 @@ import {
   TOGGLE_FOOTER,
   SET_DIRECTION,
   CHANGE_SIDEBAR_TYPE,
+  SET_HISTORY_BRANCH,
+  GET_HISTORY_BRANCH,
   CHANGE_FILTER,
 } from '../actions';
 import { combineReducers } from 'redux';
@@ -26,6 +28,7 @@ const initialState = {
     page: 0,
     size: 10,
   },
+  historyBranch: [],
   branches: [
     {
       id: 11,
@@ -398,6 +401,7 @@ const reducer = (state = initialState, action) => {
     case SET_DIRECTION: {
       return {
         ...state,
+        footer: !state.footer,
         direction: action.payload,
       };
     }
@@ -410,6 +414,18 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case SET_HISTORY_BRANCH: {
+      return {
+        ...state,
+        historyBranch: [...state.historyBranch, { ...action.payload }],
+      };
+    }
+
+    case GET_HISTORY_BRANCH: {
+      return {
+        ...state,
+        branchesRequest: true,
+      };
     case CHANGE_FILTER: {
         let field = action.field;
         let val;
