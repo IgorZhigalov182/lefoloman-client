@@ -33,12 +33,6 @@ const MainLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  // const handleSwitchMenu = ({ key }) => {
-  //   if (key === '4') {
-  //     colorTheme === 'light' ? setTheme('dark') : setTheme('light');
-  //   }
-  // };
-
   return (
     <Layout theme={colorTheme} style={{ height: '100vh' }}>
       <Header />

@@ -3,8 +3,6 @@ import useWeather from '../../../hooks/useWeather';
 
 const WeatherForecast = ({ location, lat, lon }) => {
   const weatherForecast = useWeather(location, lat, lon);
-  console.log(weatherForecast);
-  //   console.log(datetime, temperature, description);
 
   return (
     <div style={{ zIndex: '10000' }}>
