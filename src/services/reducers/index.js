@@ -9,6 +9,7 @@ import {
   CHANGE_SIDEBAR_TYPE,
   SET_HISTORY_BRANCH,
   GET_HISTORY_BRANCH,
+  CHANGE_FILTER,
 } from '../actions';
 import { combineReducers } from 'redux';
 
@@ -425,6 +426,28 @@ const reducer = (state = initialState, action) => {
         ...state,
         branchesRequest: true,
       };
+    case CHANGE_FILTER: {
+        let field = action.field;
+        let val;
+        let departments = [...state.currentFilters.departments];
+
+        if (field === 'openHoursIndividual' ||
+            field === 'openHours') {
+            field = 'departments';
+            !departments.includes(action.field) ?
+                departments.push(action.field) :
+                departments;
+            val = departments;
+        } else {
+            val = !state.currentFilters[action.field];
+        }
+        return {
+            ...state,
+            currentFilters: {
+                ...state.currentFilters,
+                [field]: val
+            }
+        }
     }
 
     default: {

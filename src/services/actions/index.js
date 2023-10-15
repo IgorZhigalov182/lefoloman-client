@@ -1,4 +1,6 @@
-import { getBranches as getBrancheesAPI } from '../../utils/api';
+import { getBranches as getBrancheesAPI,
+         getFilteredBranches as getFilteredBranchesAPI
+} from '../../utils/api';
 
 export const CHANGE_NAV_TAB = 'CNANGE_NAV_TAB';
 export const SEARCH_BRANCH = 'SEARCH_BRANCH';
@@ -10,6 +12,8 @@ export const SET_DIRECTION = 'SET_DIRECTION';
 export const CHANGE_SIDEBAR_TYPE = 'CHANGE_SIDEBAR_TYPE';
 export const SET_HISTORY_BRANCH = 'SET_HISTORY_BRANCH';
 export const GET_HISTORY_BRANCH = 'GET_HISTORY_BRANCH';
+export const CHANGE_FILTER = 'CHANGE_FILTER';
+export const GET_FILTERED_BRANCHES = 'GET_FILTERED_BRANCHES';
 
 export function getBranches() {
   return function (dispatch) {
@@ -21,7 +25,7 @@ export function getBranches() {
       .then((res) => {
         dispatch({
           type: GET_BRANCHES_SUCCESS,
-          branches: res.data,
+          branches: res.banks,
         });
       })
       .catch((e) =>
@@ -30,4 +34,16 @@ export function getBranches() {
         }),
       );
   };
+}
+
+export function getFilteredBranches(filters) {
+    return function (dispatch) {
+        getFilteredBranchesAPI(filters)
+            .then(res => {
+                dispatch({
+                    type: GET_FILTERED_BRANCHES,
+                    branches: res.banks
+                })
+            });
+    }
 }

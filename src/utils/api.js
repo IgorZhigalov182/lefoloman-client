@@ -1,4 +1,4 @@
-const URL = 'http:localhost:8080/api';
+const URL = 'http://localhost:8080/api';
 
 const checkResponse = (res) => {
     if (res.ok) {
@@ -22,3 +22,8 @@ const request = (endpoint, options = {}) => {
 };
 
 export const getBranches = () => request(`/banks`);
+
+export const getFilteredBranches = (filters) => request('/atms/filter', {
+    method: 'GET',
+    body: JSON.stringify(filters)
+  });
