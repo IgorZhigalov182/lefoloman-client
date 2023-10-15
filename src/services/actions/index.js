@@ -23,7 +23,7 @@ export function getBranches() {
       .then((res) => {
         dispatch({
           type: GET_BRANCHES_SUCCESS,
-          branches: res.data,
+          branches: res.banks,
         });
       })
       .catch((e) =>
@@ -40,7 +40,7 @@ export function getFilteredBranches(filters) {
             .then(res => {
                 dispatch({
                     type: GET_FILTERED_BRANCHES,
-                    branches: res.data
+                    branches: res.banks
                 })
             });
     }
