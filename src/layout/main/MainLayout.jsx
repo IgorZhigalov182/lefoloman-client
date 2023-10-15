@@ -12,6 +12,7 @@ import Branches from '../../components/ui/branches/Branches';
 import Footbar from '../../components/ui/footbar/Footbar';
 import RouteHistory from '../../components/ui/route-history/RouteHistory';
 import { CHANGE_SIDEBAR_TYPE } from '../../services/actions';
+import WeatherForecast from '../../components/ui/wheather-forecast/WheatherForecast';
 
 const { Sider, Content } = Layout;
 
@@ -25,7 +26,7 @@ const MainLayout = () => {
   const { navTab, footer, sidebarType } = useSelector((store) => ({
     navTab: store.state.navTab,
     footer: store.state.footer,
-    sidebarType: store.state.sidebarType
+    sidebarType: store.state.sidebarType,
   }));
 
   const {
@@ -50,20 +51,21 @@ const MainLayout = () => {
             position: 'relative',
             zIndex: 1,
           }}>
-          {
-            (!sidebarType && !footer) && 
-              <Sidebar><Branches /></Sidebar>
-          }
-          {
-            ['1', '2', '3'].includes(sidebarType) && 
+          {!sidebarType && !footer && (
             <Sidebar>
-              {sidebarType === '1' && <RouteHistory />}
-              {sidebarType === '2' && <Branches />}
-              {sidebarType === '3' && <Branches/>}
+              <Branches />
             </Sidebar>
-          }
+          )}
+          {['1', '2', '3'].includes(sidebarType) && (
+            <Sidebar>
+              {sidebarType === '1' && <Branches isHistory={true} />}
+              {sidebarType === '2' && <Branches />}
+              {sidebarType === '3' && <Branches />}
+            </Sidebar>
+          )}
           <Footbar />
           <Map coords={coordinates} />
+          <WeatherForecast location="Saint Petersburg" lat={latitude} lon={longitude} />
         </Content>
       </Layout>
     </Layout>
